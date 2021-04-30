@@ -10,7 +10,11 @@ app.listen( PORT, function ()
 
 app.use( express.static( 'static' ) );
 
-app.get("/home",function (req,res) {
+app.get( "/home", function ( req, res )
+{
     res.sendFile( __dirname + "/static/html/home.html" );
-})
+} );
 
+app.get( "/resume", function ( req, res ){
+    res.sendFile( __dirname + '/static/html/resume.html' );
+} );
