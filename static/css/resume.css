@@ -1,3 +1,30 @@
 h2{
     color: rgb(0, 176, 80);
 }
+
+.column {
+    float: left;
+    width: 45%;
+    padding: 15px;
+    margin-left: 10px;
+}
+.row {
+    content: "";
+    display: table;
+    clear: both;
+}
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+  }
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding-left: 7px;
+}
+
+h1{
+    font-size: xx-large;
+}
