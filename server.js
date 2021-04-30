@@ -8,7 +8,7 @@ app.listen( PORT, function ()
     console.log( 'Server started on Port : ' + PORT )
 } );
 
-app.use( express.static( 'static' ) );
+app.use( express.static( __dirname+'/static' ) );
 
 app.get( "/home", function ( req, res )
 {
