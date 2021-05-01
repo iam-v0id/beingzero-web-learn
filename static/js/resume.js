@@ -1,4 +1,4 @@
 function showAlert()
 {
-    alert( "WebPage under development" );
+    console.log("Yo! I got nothing to do...");
 }
