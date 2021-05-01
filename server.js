@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3000;
 
 app.listen( PORT, function ()
 {
-    console.log( 'Server started on Port : ' + PORT )
+    console.log( 'Server started at  http://localhost:' + PORT )
 } );
 
 app.use( express.static( __dirname+'/static' ) );
