@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RGB</title>
+    <link rel="icon" href="/img/colors.png">
+    <link rel="stylesheet" href="/css/colors.css">
+</head>
+
+<body>
+    <div>
+        <div class="colorbox" id="colorbox">
+            rgb(0,0,0)
+        </div>
+
+        <div class="flex">
+            <div>
+                <p>RED</p>
+                <input type="range" min="0" max="255" step="1" value="255" id="redrange" oninput="changeColor()">
+                <div id="reddisplay">0</div>
+            </div>
+            <div>
+                <p>GREEN</p>
+                <input type="range" min="0" max="255" step="1" value="255" id="greenrange" oninput="changeColor()">
+                <div id="greendisplay">0</div>
+            </div>
+            <div>
+                <p>BLUE</p>
+                <input type="range" min="0" max="255" step="1" value="255" id="bluerange" oninput="changeColor()">
+                <div id="bluedisplay">0</div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/colors.js"></script>
+</body>
+
+</html>

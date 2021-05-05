@@ -21,4 +21,8 @@ app.get( "/resume", function ( req, res ){
 
 app.get("/google",function (req,res) {
     res.sendFile( __dirname + "/static/html/googlesearch.html" );
+} )
+
+app.get("/colors",function (req,res) {
+    res.sendFile( __dirname + "/static/html/colors.html" );
 })

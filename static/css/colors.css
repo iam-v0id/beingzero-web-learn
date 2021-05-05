@@ -1,0 +1,17 @@
+.colorbox{
+    width: 100vw;
+    height: 40vw;
+    display: table-cell;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: bolder;
+    font-size: 5vw;
+    font-style: italic;
+    text-align:center;
+    vertical-align: middle;
+}
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
