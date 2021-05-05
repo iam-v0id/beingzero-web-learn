@@ -8,9 +8,5 @@ function changeColor()
     document.getElementById( "greendisplay" ).innerHTML = green;
     document.getElementById( "bluedisplay" ).innerHTML = blue;
 
-    document.getElementById( "colorbox" ).innerHTML = 'rgb(' + red + ',' + green + ',' + blue+')';
-
-
-    document.getElementById( "colorbox" ).style.backgroundColor = `rgb( ${red}, ${green}, ${blue} )`;
-    
+    document.getElementById( "colorbox" ).innerHTML = document.getElementById( "colorbox" ).style.backgroundColor = `rgb( ${red}, ${green}, ${blue} )`;   
 }
