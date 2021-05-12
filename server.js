@@ -19,10 +19,24 @@ app.get( "/resume", function ( req, res ){
     res.sendFile( __dirname + '/static/html/resume.html' );
 } );
 
-app.get("/google",function (req,res) {
+app.get( "/google", function ( req, res )
+{
     res.sendFile( __dirname + "/static/html/googlesearch.html" );
-} )
+} );
 
-app.get("/colors",function (req,res) {
+app.get( "/colors", function ( req, res )
+{
     res.sendFile( __dirname + "/static/html/colors.html" );
-})
+} );
+app.get( "/login", function ( req, res )
+{
+    res.sendFile( __dirname + "/static/html/login.html" );
+} );
+app.get( "/register", function ( req, res )
+{
+    res.sendFile( __dirname + "/static/html/register.html" );
+} );
+app.get( "/todo", function ( req, res )
+{
+    res.sendFile( __dirname + "/static/html/todo.html" );
+} );

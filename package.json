@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/iam-v0id/beingzero-web-learn#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "live-server": "^1.2.1"
   }
 }
