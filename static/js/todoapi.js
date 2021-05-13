@@ -17,7 +17,7 @@ function fillTodos()
     // }
     // xhr.send();
     $.ajax( {
-        url: `https://${window.location.host}/api/todos`,
+        url: `http://${window.location.host}/api/todos`,
         type: 'GET',
         success: function ( result )
         {
