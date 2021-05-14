@@ -12,7 +12,7 @@ app.use( express.static( __dirname + '/static' ) );
 
 app.use( express.json() );
 
-app.use(express.urlencoded({extended: true}));
+app.use( express.urlencoded( {extended: true} ) );
 
 app.get( "/", function ( req, res )
 {
@@ -42,6 +42,10 @@ app.get( "/register", function ( req, res )
 {
     res.sendFile( __dirname + "/static/html/register.html" );
 } );
+app.get( "/test", function ( req, res )
+{
+    res.sendFile( __dirname + "/static/html/test.html" );
+} );
 
 app.get( "/todo", function ( req, res )
 {
@@ -49,24 +53,25 @@ app.get( "/todo", function ( req, res )
 } );
 
 
-var todos = [{todoId:123,task:"do nothing"},{todoId:13,task:"wow"}];
+var todos = [];
 
 app.get( '/api/todos', function ( req, res )
 {
     // Get all todos
-    res.send(JSON.stringify(todos));
+    res.send( JSON.stringify( todos ) );
 } );
 
 app.get( '/api/todos/:todoId', function ( req, res )
 {
     // req.params.todoId
     // get single todo with given id
+
     for ( let i = 0; i < todos.length; i++ )
     {
-        if ( todos[i].todoId === req.params.todoId )
-            res.send(todos[i]);
+        if ( todos[i].todoId == req.params.todoId )
+            res.send( todos[i] );
     }
-    res.sendStatus(404);
+    res.sendStatus( 404 );
 } );
 
 app.put( '/api/todos/:todoId', function ( req, res )
@@ -74,7 +79,7 @@ app.put( '/api/todos/:todoId', function ( req, res )
     // update
     for ( let i = 0; i < todos.length; i++ )
     {
-        if ( todos[i].todoId === req.params.todoId )
+        if ( todos[i].todoId == req.params.todoId )
         {
             todos[i] = req.body;
             return;
@@ -88,10 +93,11 @@ app.delete( '/api/todos/:todoId', function ( req, res )
     // delete
     for ( let i = 0; i < todos.length; i++ )
     {
-        if ( todos[i].todoId === req.params.todoId )
+        if ( todos[i].todoId == req.params.todoId )
         {
-            todos.splice( i );
+            todos.splice( i, 1 );
             res.sendStatus( 200 );
+            return;
         }
     }
     res.sendStatus( 404 );

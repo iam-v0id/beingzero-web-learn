@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,13 +8,20 @@
     <link rel="stylesheet" href="/css/todo.css">
     <title>Todo</title>
 </head>
-<body onload="fillTodos()">
-    <div id="block">
+
+<body onload="displayTodos()">
+    <div>
         <div>
-            <input type="text" name="" id="input" placeholder="What needs to be done?" >
+            <input type="text" name="" id="input" placeholder="What needs to be done?" onkeydown="addTask()">
+        </div>
+        <div id="todos">
+
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="/js/todoapi.js"></script>
+    <script src="/js/test.js"></script>
+
 </body>
+
 </html>
