@@ -1,8 +1,30 @@
-.flex{
+body{
+    background-color: #b3e5fc
+}
 
+.todo-item{
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Roboto';
+    font-weight: 600;
+    font-size:3vw;
+    margin: 10px 50px;;
 }
 .btn{
-    float:inline-start;
-    background-color: red;  
+    font-family: 'Roboto';
+    font-size:2vw;
+    float:right;
+    background-color: dodgerblue;
     color:white;
+}
+
+.btn:hover{
+    background-color:rgb(49, 214, 123);
+}
+
+#input{
+    margin:10px;
+    font-family: 'Roboto';
+    font-size:4vw;
+    width:98%;
 }
