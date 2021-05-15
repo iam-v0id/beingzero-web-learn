@@ -1,7 +1,7 @@
 function displayTodos()
 {
     $.ajax( {
-        url: `http://${window.location.host}/api/todos`,
+        url: `https://${window.location.host}/api/todos`,
         type: 'GET',
         success: function ( result )
         {
@@ -27,7 +27,7 @@ function addTask()
         return;
     var data = {task: document.getElementById( "input" ).value, todoId: Date.now()};
     $.ajax( {
-        url: `http://${window.location.host}/api/todos`,
+        url: `https://${window.location.host}/api/todos`,
         type: 'POST',
         data: data
     } );
@@ -41,7 +41,7 @@ function deleteTask( obj )
     var todoId = $( obj ).attr( 'id' );
     // /api/todos/:todoId
     $.ajax( {
-        url: `http://${window.location.host}/api/todos/${todoId}`,
+        url: `https://${window.location.host}/api/todos/${todoId}`,
         method: "DELETE"
     } );
     document.getElementById( `div-${todoId}` ).remove();
@@ -60,7 +60,7 @@ function editTask( obj )
             todoId = id.slice( 4 );
             var data = {task: task, todoId: todoId};
             $.ajax( {
-                url: `http://${window.location.host}/api/todos/${todoId}`,
+                url: `https://${window.location.host}/api/todos/${todoId}`,
                 type: 'PUT',
                 data: data
             } );
@@ -73,7 +73,7 @@ function editTask( obj )
         todoId = id.slice( 4 );
         var data = {task: task, todoId: todoId};
         $.ajax( {
-            url: `http://${window.location.host}/api/todos/${todoId}`,
+            url: `https://${window.location.host}/api/todos/${todoId}`,
             type: 'PUT',
             data: data
         } );
