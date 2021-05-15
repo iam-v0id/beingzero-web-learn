@@ -13,7 +13,6 @@ function displayTodos()
         },
         error: function ( error )
         {
-            a
             console.log( error );
         }
     } );
@@ -29,11 +28,19 @@ function addTask()
     $.ajax( {
         url: `https://${window.location.host}/api/todos`,
         type: 'POST',
-        data: data
+        data: data,
+        success: function ( result )
+        {
+            ele = document.getElementById( "todos" );
+            ele.innerHTML = `\n<div class="todo-item" id="div-${data.todoId}" ><label id="lbl-${data.todoId}" onclick="editTask(this)">${data.task}</label><button id="${data.todoId}" class="btn" onclick="deleteTask(this)">done</button></div>\n` + ele.innerHTML;
+            document.getElementById( "input" ).value = "";
+        },
+        error: function ( error )
+        {
+            console.log( error );
+        }
     } );
-    ele = document.getElementById( "todos" );
-    ele.innerHTML = `\n<div class="todo-item" id="div-${data.todoId}" ><label id="lbl-${data.todoId}" onclick="editTask(this)">${data.task}</label><button id="${data.todoId}" class="btn" onclick="deleteTask(this)">done</button></div>\n` + ele.innerHTML;
-    document.getElementById( "input" ).value = "";
+
 }
 
 function deleteTask( obj )
@@ -42,9 +49,17 @@ function deleteTask( obj )
     // /api/todos/:todoId
     $.ajax( {
         url: `https://${window.location.host}/api/todos/${todoId}`,
-        method: "DELETE"
+        method: "DELETE",
+        success: function ( result )
+        {
+            document.getElementById( `div-${todoId}` ).remove();
+        },
+        error: function ( error )
+        {
+            console.log( error );
+        }
     } );
-    document.getElementById( `div-${todoId}` ).remove();
+
 }
 
 function editTask( obj )
