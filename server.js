@@ -1,5 +1,18 @@
 const express = require( "express" );
+const course = require( "./backend/libs/courselib" );
+var mongoose = require( 'mongoose' );
 const app = express();
+
+var pass = process.env.Mongo_pass;
+
+const connection_string = "mongodb+srv://iam-v0id:" + pass + "@cluster0.lspfh.mongodb.net/Cluster0?retryWrites=true&w=majority";
+
+var dbOptions = {useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true, auto_reconnect: true};
+mongoose.connect( connection_string, dbOptions );
+mongoose.connection.on( 'connected', function ()
+{
+    console.log( 'MongoDB connected!' );
+} );
 
 const PORT = process.env.PORT || 3000;
 
@@ -110,3 +123,42 @@ app.post( '/api/todos', function ( req, res )
     // req.body will have what frontend sent
     todos.push( req.body );
 } );
+
+app.get( '/crud', function ( req, res )
+{
+    res.sendFile( __dirname + '/static/html/crud.html' );
+} );
+
+
+app.get( '/api/crud', function ( req, res )
+{
+    course.getallcourses( function ( err, courseobj )
+    {
+        res.json( courseobj );
+    } );
+} );
+
+app.patch( '/api/crud:id', function ( req, res )
+{
+    req.body.articles = parseInt( req.body.articles );
+    course.updatecourse( req.params.id, req.body, function ( err, courseobj )
+    {
+        res.json( courseobj );
+    } );
+} );
+
+app.delete( '/api/crud/:id', function ( req, res )
+{
+    console.log( req.params.id );
+    course.deletecourse( req.params.id, function ( err, courseobj )
+    {
+        res.json( courseobj );
+    } )
+} );
+
+app.post( '/api/crud', function ( req, res )
+{
+    course.createcourse( req.body );
+    res.redirect( "/crud" );
+} );
+
