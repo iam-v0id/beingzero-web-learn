@@ -145,16 +145,13 @@
     {
         var testid = $( this ).data( 'testid' )
         var value = $( this ).html()
-
         $( this ).unbind()
         $( this ).html( `<input class="result form-control" data-testid="${testid}" type="text" value="${value}">` )
-
         $( `.result` ).on( 'keyup', function ()
         {
             var testid = $( this ).data( 'testid' )
             var saveBtn = $( `#save-${testid}` )
             saveBtn.prop( 'disabled', false )
-
         } )
 
     }
@@ -167,14 +164,6 @@
         var row = $( `.test-row-${testid}` )
 
         saveBtn.prop( 'disabled', true )
-        row.css( 'opacity', "0.5" )
-
-        setTimeout( function ()
-        {
-            row.css( 'opacity', '1' )
-        }, 2000 )
-
-
     }
 
     function deleteTest()
@@ -214,7 +203,7 @@
     {
         var testid = $( this ).data( 'testid' )
         var row = $( `.test-row-${testid}` )
-        row.remove();
+        row.remove()
 
     }
 </script>

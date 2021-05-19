@@ -64,7 +64,7 @@
 </html>
 <script>
 
-    var newTest = {'name': null, 'id': Date.now(), 'Articels': null}
+    var newTest = {'name': null, 'id': Date.now(), 'Articels': null, isDeleted: false};
 
     $( '#add-test' ).on( 'click', function ()
     {
@@ -95,7 +95,7 @@
         } else
         {
             $.ajax( {
-                url: `http://${window.location.host}/api/crud`, method: 'POST', data: newTest, success: function ()
+                url: `/api/crud`, method: 'POST', data: newTest, success: function ()
                 {
                     addRow( newTest );
                 }, error: function ( err )
@@ -123,13 +123,14 @@
     function render()
     {
         $.ajax( {
-            url: `http://${window.location.host}/api/crud`, method: 'GET', success: function ( result )
+            url: `/api/crud`, method: 'GET', success: function ( result )
             {
                 console.log( result );
 
                 for ( var i in result )
                 {
-                    addRow( result[i] );
+                    if ( !result[i].isDeleted )
+                        addRow( result[i] );
                 }
             }, error: function ( err )
             {
@@ -141,7 +142,7 @@
     function addRow( obj )
     {
         var row = `<tr scope="row" class="test-row-${obj.id}">
-                       <td>${obj.name}</td>
+                       <td id="name-${obj.id}">${obj.name}</td>
                        <td id="result-${obj.id}" data-testid="${obj.id}"">${obj.Articels}</td>
                        <td>
                          <button class="btn btn-sm btn-danger" data-testid=${obj.id} id="delete-${obj.id}">Delete</button>
@@ -169,8 +170,12 @@
         var testid = $( this ).data( 'testid' )
         var value = $( this ).html()
 
+
+
+
+
         $( this ).unbind()
-        $( this ).html( `<input class="result form-control" data-testid="${testid}" type="text" value="${value}">` )
+        $( this ).html( `<input class="result form-control" id="input-${testid}" data-testid="${testid}" type="text" value="${value}">` )
 
         $( `.result` ).on( 'keyup', function ()
         {
@@ -185,20 +190,28 @@
     function saveUpdate()
     {
 
-        console.log( 'Saved!' )
+        console.log( 'Saved!' );
         var testid = $( this ).data( 'testid' )
         var saveBtn = $( `#save-${testid}` )
         var row = $( `.test-row-${testid}` )
-
         saveBtn.prop( 'disabled', true )
-        row.css( 'opacity', "0.5" )
-
-        setTimeout( function ()
-        {
-            row.css( 'opacity', '1' )
-        }, 2000 )
-
-
+        var articles = document.getElementById( `input-${testid}` ).value;
+        var name = document.getElementById( `input-${testid}` ).innerHTML;
+        console.log( name );
+        var data = {'id': testid, 'Articels': articles};
+        $.ajax( {
+            url: "/api/crud/" + testid,
+            method: "PUT",
+            data: data,
+            success: function ( result )
+            {
+                document.getElementById( `result-${testid}` ).innerHTML = articles;
+            },
+            error: function ( err )
+            {
+                console.log( err );
+            }
+        } );
     }
 
     function deleteTest()
@@ -240,7 +253,7 @@
         var row = $( `.test-row-${testid}` )
 
         $.ajax( {
-            url: `http://${window.location.host}/api/crud/${testid}`, method: 'DELETE', success: function ()
+            url: `/api/crud/${testid}`, method: 'DELETE', success: function ()
             {
                 row.remove();
             }, error: function ( err )

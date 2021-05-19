@@ -138,11 +138,15 @@ app.get( '/api/crud', function ( req, res )
     } );
 } );
 
-app.patch( '/api/crud:id', function ( req, res )
+app.put( '/api/crud/:id', function ( req, res )
 {
-    req.body.articles = parseInt( req.body.articles );
+    req.body.Articels = parseInt( req.body.Articels );
+    console.log( "Got PUT Req" );
     course.updatecourse( req.params.id, req.body, function ( err, courseobj )
     {
+        if ( err )
+            console.log( err );
+
         res.json( courseobj );
     } );
 } );

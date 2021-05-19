@@ -1,19 +1,10 @@
 const coursemodel = require( '../models/coursemodel' );
 
-module.exports.createcourse = function ( courseobj, callback )
+module.exports.createcourse = function ( courseobj )
 {
-    var course = new coursemodel( courseobj );
-    course.save( function ( err, courseobj )
-    {
-        if ( err )
-        {
-            console.log( "err" + err );
-        }
-        else
-        {
-            callback( err, courseobj );
-        }
-    } );
+    var newcourse = new coursemodel( courseobj );
+    newcourse.save();
+
 }
 
 module.exports.getallcourses = function ( callback )
@@ -50,7 +41,8 @@ module.exports.updatecourse = function ( id, options, callback )
 
 module.exports.deletecourse = function ( id, callback )
 {
-    coursemodel.deleteOne( {id: id}, function ( err, courseobj )
+    var options = {isDeleted: true};
+    coursemodel.updateOne( {id: id}, {$set: options}, function ( err, courseobj )
     {
         if ( err )
         {
