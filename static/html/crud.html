@@ -23,7 +23,7 @@
     </style>
 </head>
 
-<body>
+<body onload="render()">
     <br />
     <div class="container">
         <div class="row">
@@ -36,7 +36,7 @@
                         <select class="form-control" id="test-name" style="margin: 10px;">
                             <option selected>select course</option>
                             <option>Java</option>
-                            <option>Paython</option>
+                            <option>Python</option>
                             <option>Php</option>
                         </select>
                         <input class="form-control" placeholder=" Enter no of articels" type="number" id="test-result"
@@ -64,8 +64,7 @@
 </html>
 <script>
 
-    var newId = 4
-    var newTest = {'name': null, 'id': newId, 'Articels': null}
+    var newTest = {'name': null, 'id': Date.now(), 'Articels': null}
 
     $( '#add-test' ).on( 'click', function ()
     {
@@ -76,13 +75,16 @@
     {
         newTest.Articels = $( this ).val()
         console.log( newTest )
-
+        newTest.id = Date.now();
     } )
 
     $( '#test-name' ).on( 'change', function ()
     {
         newTest.name = $( this ).val()
         console.log( newTest )
+        newTest.id = Date.now();
+
+
     } )
 
     $( '#create-test' ).on( 'click', function ()
@@ -92,9 +94,16 @@
             alert( 'No test selected!' )
         } else
         {
-            addRow( newTest );
-            console.log( newTest );
-            $.ajax( {url: `http://${window.location.host}/api/crud`, method: 'POST', data: newTest} );
+            $.ajax( {
+                url: `http://${window.location.host}/api/crud`, method: 'POST', data: newTest, success: function ()
+                {
+                    addRow( newTest );
+                }, error: function ( err )
+                {
+                    console.log( err );
+                }
+            } );
+
             $( '#test-name' ).val( '' )
             $( '#test-result' ).val( '' )
             $( '.form-wrapper' ).addClass( 'hidden' )
@@ -106,23 +115,31 @@
     //     {'name': 'HTML', 'id': '2', 'Articels': "1"},
     //     {'name': 'CSS', 'id': '3', 'Articels': "24"},
     // ]
-    var tests;
-    $.ajax( {
-        url: `http://${window.location.host}/api/crud`, method: 'GET', success: function ( result )
-        {
-            console.log( result );
-            tests = result;
-            for ( var i in tests )
-            {
-                addRow( tests[i] )
-            }
-        }
-    } );
 
+    // for ( var i in tests )
+    // {
+    //     addRow( tests[i] )
+    // }
+    function render()
+    {
+        $.ajax( {
+            url: `http://${window.location.host}/api/crud`, method: 'GET', success: function ( result )
+            {
+                console.log( result );
+
+                for ( var i in result )
+                {
+                    addRow( result[i] );
+                }
+            }, error: function ( err )
+            {
+                console.log( err );
+            }
+        } );
+    }
 
     function addRow( obj )
     {
-
         var row = `<tr scope="row" class="test-row-${obj.id}">
                        <td>${obj.name}</td>
                        <td id="result-${obj.id}" data-testid="${obj.id}"">${obj.Articels}</td>
@@ -167,6 +184,7 @@
 
     function saveUpdate()
     {
+
         console.log( 'Saved!' )
         var testid = $( this ).data( 'testid' )
         var saveBtn = $( `#save-${testid}` )
@@ -220,7 +238,15 @@
     {
         var testid = $( this ).data( 'testid' )
         var row = $( `.test-row-${testid}` )
-        row.remove()
-        $.ajax( {url: `http://${window.location.host}/api/crud/${testid}`, method: 'DELETE', } );
+
+        $.ajax( {
+            url: `http://${window.location.host}/api/crud/${testid}`, method: 'DELETE', success: function ()
+            {
+                row.remove();
+            }, error: function ( err )
+            {
+                console.log( err );
+            }
+        } );
     }
 </script>
