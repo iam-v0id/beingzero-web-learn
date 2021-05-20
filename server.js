@@ -1,24 +1,14 @@
 const express = require( "express" );
 const course = require( "./backend/libs/courselib" );
-var mongoose = require( 'mongoose' );
+const db = require( "./backend/db/connect" );
+const config = require( "./backend/config/config" );
 const app = express();
 
-var pass = process.env.Mongo_pass;
+db.connect();
 
-const connection_string = "mongodb+srv://iam-v0id:" + pass + "@cluster0.lspfh.mongodb.net/Cluster0?retryWrites=true&w=majority";
-
-var dbOptions = {useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true, auto_reconnect: true};
-mongoose.connect( connection_string, dbOptions );
-mongoose.connection.on( 'connected', function ()
+app.listen( config.webPort, function ()
 {
-    console.log( 'MongoDB connected!' );
-} );
-
-const PORT = process.env.PORT || 3000;
-
-app.listen( PORT, function ()
-{
-    console.log( 'Server started at  http://localhost:' + PORT )
+    console.log( 'Server started at  http://localhost:' + config.webPort )
 } );
 
 app.use( express.static( __dirname + '/static' ) );
