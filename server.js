@@ -156,3 +156,7 @@ app.post( '/api/crud', function ( req, res )
     res.redirect( "/crud" );
 } );
 
+app.get( '/tambola', function ( req, res )
+{
+    res.sendFile( __dirname + "/static/html/tambola.html" );
+} );
