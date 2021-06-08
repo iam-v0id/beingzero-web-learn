@@ -11,7 +11,7 @@ app.listen( config.webPort, function ()
     console.log( 'Server started at  http://localhost:' + config.webPort )
 } );
 
-app.use( express.static( __dirname + '/static' ) );
+app.use( express.static( __dirname + '/frontend' ) );
 
 app.use( express.json() );
 
@@ -19,40 +19,40 @@ app.use( express.urlencoded( {extended: true} ) );
 
 app.get( "/", function ( req, res )
 {
-    res.sendFile( __dirname + "/static/html/index.html" );
+    res.sendFile( __dirname + "/frontend/html/index.html" );
 } );
 
 app.get( "/resume", function ( req, res )
 {
-    res.sendFile( __dirname + '/static/html/resume.html' );
+    res.sendFile( __dirname + '/frontend/html/resume.html' );
 } );
 
 app.get( "/google", function ( req, res )
 {
-    res.sendFile( __dirname + "/static/html/googlesearch.html" );
+    res.sendFile( __dirname + "/frontend/html/googlesearch.html" );
 } );
 
 app.get( "/colors", function ( req, res )
 {
-    res.sendFile( __dirname + "/static/html/colors.html" );
+    res.sendFile( __dirname + "/frontend/html/colors.html" );
 } );
 app.get( "/login", function ( req, res )
 {
-    res.sendFile( __dirname + "/static/html/login.html" );
+    res.sendFile( __dirname + "/frontend/html/login.html" );
 } );
 
 app.get( "/register", function ( req, res )
 {
-    res.sendFile( __dirname + "/static/html/register.html" );
+    res.sendFile( __dirname + "/frontend/html/register.html" );
 } );
 app.get( "/test", function ( req, res )
 {
-    res.sendFile( __dirname + "/static/html/test.html" );
+    res.sendFile( __dirname + "/frontend/html/test.html" );
 } );
 
 app.get( "/todo", function ( req, res )
 {
-    res.sendFile( __dirname + "/static/html/todoapi.html" );
+    res.sendFile( __dirname + "/frontend/html/todoapi.html" );
 } );
 
 
@@ -116,7 +116,7 @@ app.post( '/api/todos', function ( req, res )
 
 app.get( '/crud', function ( req, res )
 {
-    res.sendFile( __dirname + '/static/html/crud.html' );
+    res.sendFile( __dirname + '/frontend/html/crud.html' );
 } );
 
 
@@ -158,5 +158,5 @@ app.post( '/api/crud', function ( req, res )
 
 app.get( '/tambola', function ( req, res )
 {
-    res.sendFile( __dirname + "/static/html/tambola.html" );
+    res.sendFile( __dirname + "/frontend/html/tambola.html" );
 } );
