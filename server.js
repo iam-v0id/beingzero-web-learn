@@ -160,3 +160,13 @@ app.get( '/tambola', function ( req, res )
 {
     res.sendFile( __dirname + "/frontend/html/tambola.html" );
 } );
+
+app.get( '/register', function ( req, res )
+{
+    res.sendFile( __dirname + "/frontend/html/register.html" )
+} );
+
+app.get( '/login', function ( req, res )
+{
+    res.sendFile( __dirname + "/frontend/html/login.html" )
+} );
