@@ -1,10 +1,9 @@
-const coursemodel = require( '../models/coursemodel' );
+const coursemodel = require( '../models/course' );
 
 module.exports.createcourse = function ( courseobj )
 {
     var newcourse = new coursemodel( courseobj );
     newcourse.save();
-
 }
 
 module.exports.getallcourses = function ( callback )

@@ -1,25 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/index.css">
-    <title>WebPage</title>
+    <meta name="google-signin-client_id"
+        content="283869563240-mp4o1tf0ghlnmvasf6nhfm5m1eh0f8u2.apps.googleusercontent.com">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css"
+        integrity="sha512-6S2HWzVFxruDlZxI3sXOZZ4/eJ8AcxkQH1+JjSe/ONCEqR9L4Ysq5JdT5ipqtzU7WHalNwzwBv+iE51gNHJNqQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Home</title>
 </head>
+
 <body>
-    <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <div>
+                <a class="btn btn-secondary my-2 my-sm-0 notLoggedIn" href="/html/register.html"
+                    id="btn-register">Register</a>
+            </div>
+            &emsp;&emsp;
+            <div id="g_id_onload"
+                data-client_id="1056193769505-tcplfrnv9lt2k99ipsjivjp0be8fotrf.apps.googleusercontent.com"
+                data-login_uri="/auth/login" data-auto_prompt="false">
+            </div>
+            <div class="g_id_signin notLoggedIn" data-type="standard" data-size="large" data-theme="outline"
+                data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+            </div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-    </header>
-    <main>
-        <ul>
-            <li><a href="/colors">Colors</a></li>
-            <li><a href="/google">Google Search Page</a></li>
-            <li><a href="/resume">Resume</a></li>
-        </ul>
-    </main>
-    <footer>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
 
-    </footer>
+
+
+                </ul>
+                <div class="notLoggedIn">
+                    <div class="d-flex">
+                        <input class="form-control me-sm-2" type="text" placeholder="username" id="username">
+                        <input class="form-control me-sm-2" type="password" placeholder="password" id="password">
+                        <button class="btn btn-secondary my-2 my-sm-0" type="submit" id="btn-login">Login</button>
+                    </div>
+                </div>
+
+                <div class="LoggedIn">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a id="user-dropdown" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                                role="button" aria-haspopup="true" aria-expanded="false">Welcome, </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Separated link</a>
+                            </div>
+                        </li>
+                    </ul>
+
+                </div>
+                <div class="LoggedIn"><button type="button" id="btn-logout" class="btn btn-secondary">Logout</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <button id="btn-info" type="button" class="btn btn-info">Show My email ID</button>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/js/bootstrap.min.js"
+        integrity="sha512-EKWWs1ZcA2ZY9lbLISPz8aGR2+L7JVYqBAYTq5AXgBkSjRSuQEGqWx8R1zAX16KdXPaCjOCaKE8MCpU0wcHlHA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"
+        integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <script src="/js/site.js"></script>
+    <script>
+        function onSignIn( googleUser )
+        {
+            var profile = googleUser.getBasicProfile();
+            console.log( 'ID: ' + profile.getId() ); // Do not send to your backend! Use an ID token instead.
+            console.log( 'Name: ' + profile.getName() );
+            console.log( 'Image URL: ' + profile.getImageUrl() );
+            console.log( 'Email: ' + profile.getEmail() ); // This is null if the 'email' scope is not present.
+        }
+    </script>
 </body>
+
 </html>

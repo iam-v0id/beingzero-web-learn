@@ -1,6 +1,6 @@
 const config = require( "../config/config" );
 var mongoose = require( 'mongoose' );
-var connection_string = config.mongoConnectionString;
+var connection_string = process.env.MONGO_CONNECTION_STRING;
 module.exports.connect = function ()
 {
     console.log( "Trying to connect to MongoDB " );

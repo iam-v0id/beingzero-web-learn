@@ -1,7 +1,16 @@
+require( 'dotenv' ).config();
+
+var User = require( './backend/models/user' );
 const express = require( "express" );
-const course = require( "./backend/libs/courselib" );
+const course = require( "./backend/controllers/course" );
 const db = require( "./backend/db/connect" );
 const config = require( "./backend/config/config" );
+var authRouter = require( './backend/routes/auth' );
+var session = require( 'express-session' );
+const MongoStore = require( 'connect-mongo' );
+var path = require( 'path' );
+var cookieParser = require( 'cookie-parser' );
+var logger = require( 'morgan' );
 const app = express();
 
 db.connect();
@@ -11,11 +20,17 @@ app.listen( config.webPort, function ()
     console.log( 'Server started at  http://localhost:' + config.webPort )
 } );
 
+app.use( logger( 'dev' ) );
 app.use( express.static( __dirname + '/frontend' ) );
-
 app.use( express.json() );
-
 app.use( express.urlencoded( {extended: true} ) );
+app.use( cookieParser() );
+app.use( session( {
+    resave: false,
+    saveUninitialized: false,
+    secret: process.env.SESSION_SECRET,
+    store: MongoStore.create( {mongoUrl: process.env.MONGO_CONNECTION_STRING} )
+} ) );
 
 app.get( "/", function ( req, res )
 {
@@ -166,7 +181,31 @@ app.get( '/register', function ( req, res )
     res.sendFile( __dirname + "/frontend/html/register.html" )
 } );
 
-app.get( '/login', function ( req, res )
+
+app.post( '/dashboard', function ( req, res )
 {
-    res.sendFile( __dirname + "/frontend/html/login.html" )
+    res.sendFile( __dirname + "/frontend/html/dashboard.html" )
+} );
+
+app.use( '/auth', authRouter );
+
+
+app.use( '/mail', ( req, res ) =>
+{
+    if ( req.session && req.session.user )
+    {
+        var username = req.session.user.username;
+        User.findOne( {name: username}, ( err, userobj ) =>
+        {
+            if ( err )
+                res.send( err );
+            if ( userobj )
+                res.json( {success: true, email: userobj.email} );
+            else
+                res.json( {success: false} );
+        } );
+
+    }
+    else
+        res.json( {success: false} );
 } );
