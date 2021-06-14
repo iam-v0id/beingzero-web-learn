@@ -68,9 +68,25 @@ $( '#register-submit' ).click( function ()
 
 $( '#btn-logout ' ).click( () =>
 {
-    localStorage.removeItem( "user" );
-    $( '.notLoggedIn' ).show();
-    $( '.LoggedIn' ).hide();
+    localStorage.clear();
+    sessionStorage.clear();
+    $.ajax( {
+        url: '/auth/logout',
+        method: 'GET',
+        success: ( obj ) =>
+        {
+            if ( obj.success )
+            {
+                $( '.notLoggedIn' ).show();
+                $( '.LoggedIn' ).hide();
+            }
+        },
+        error: ( err ) =>
+        {
+            console.log( err ); toastr.error( 'Something went Wrong' );
+        }
+    } );
+
 
 } );
 

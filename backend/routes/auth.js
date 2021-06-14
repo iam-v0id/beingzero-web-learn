@@ -54,5 +54,11 @@ router.post( '/login', function ( req, res, cb )
 } );
 router.post( '/register', register );
 
+router.get( '/logout', function ( req, res )
+{
+    req.session.destroy();
+    res.json( {success: true} );
+} );
+
 
 module.exports = router;
