@@ -115,8 +115,33 @@ $( '#btn-info' ).click( () =>
     } );
 } );
 
-
-function onSignIn( obj )
+function onSignIn( googleobj )
 {
-    console.log( obj );
+    $.ajax( {
+        url: '/auth/login',
+        method: 'POST',
+        data: googleobj,
+        success: ( obj ) =>
+        {
+            if ( obj.success )
+            {
+                $( '.notLoggedIn' ).hide();
+                $( '.LoggedIn' ).show();
+                $( '#user-dropdown' ).html( "Welcome, " + obj.name );
+                toastr.success( 'Login Sucessful' );
+                localStorage.setItem( "user", obj.name );
+
+            }
+            else
+            {
+                toastr.error( 'Invalid username or password' );
+            }
+
+        },
+        error: ( err ) =>   
+        {
+            console.log( err );
+        }
+    } );
+
 }

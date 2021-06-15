@@ -5,7 +5,7 @@ var User = require( '../models/user' ); ``
 
 router.post( '/login', function ( req, res, cb )
 {
-    if ( req.body.g_csrf_token && req.body.g_csrf_token == req.cookies.g_csrf_token )
+    if ( req.body.credential )
     {
         const {OAuth2Client} = require( 'google-auth-library' );
         const client = new OAuth2Client( process.env.GOOGLE_CLIENT_ID );
@@ -23,7 +23,7 @@ router.post( '/login', function ( req, res, cb )
             userobj = {name: payload['name'], email: payload['email']}
             User.findOne( {email: userobj.email}, ( err, collection ) =>
             {
-                if ( collection && collection.length == 0 )
+                if ( !collection )
                 {
                     var newuser = new User( userobj );
                     newuser.save();
