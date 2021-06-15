@@ -118,18 +118,5 @@ $( '#btn-info' ).click( () =>
 
 function onSignIn( obj )
 {
-
-    if ( obj.success )
-    {
-        $( '.notLoggedIn' ).hide();
-        $( '.LoggedIn' ).show();
-        $( '#user-dropdown' ).html( "Welcome, " + obj.name );
-        toastr.success( 'Login Sucessful' );
-        localStorage.setItem( "user", obj.name );
-
-    }
-    else
-    {
-        toastr.error( 'Invalid username or password' );
-    }
+    console.log( obj );
 }
