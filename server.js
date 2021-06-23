@@ -11,6 +11,8 @@ const MongoStore = require( 'connect-mongo' );
 var path = require( 'path' );
 var cookieParser = require( 'cookie-parser' );
 var logger = require( 'morgan' );
+var cors = require( 'cors' );
+
 const app = express();
 
 db.connect();
@@ -19,7 +21,7 @@ app.listen( config.webPort, function ()
 {
     console.log( 'Server started at  http://localhost:' + config.webPort )
 } );
-
+app.use( cors() );
 app.use( logger( 'dev' ) );
 app.use( express.static( __dirname + '/frontend' ) );
 app.use( express.json() );
