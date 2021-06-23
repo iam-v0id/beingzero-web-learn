@@ -5,6 +5,7 @@ var User = require( '../models/user' ); ``
 
 router.post( '/login', function ( req, res, cb )
 {
+
     if ( req.body.credential )
     {
         const {OAuth2Client} = require( 'google-auth-library' );

@@ -117,6 +117,7 @@ $( '#btn-info' ).click( () =>
 
 function onSignIn( googleobj )
 {
+    console.log( googleobj );
     $.ajax( {
         url: '/auth/login',
         method: 'POST',
