@@ -212,6 +212,19 @@ app.use( '/mail', ( req, res ) =>
         res.json( {success: false} );
 } );
 
+app.get( '/dummy1', ( req, res ) =>
+{
+    res.json( [
+        {"problemName": "SALARY", "problemLink": "https://www.stopstalk.com/problems?problem_id=19287", "siteIcon": "https://www.stopstalk.com/stopstalk/static/images/codechef_small.png?_rev=20201225170526", "total_submissions":124, "solved":89},
+        {"problemName": "STRNO", "problemLink": "https://www.stopstalk.com/problems?problem_id=70268", "siteIcon": "https://www.stopstalk.com/stopstalk/static/images/codechef_small.png?_rev=20201225170526", "total_submissions":432, "solved":345},
+        {"problemName": "XXXXX", "problemLink": "https://www.stopstalk.com/problems?problem_id=75554", "siteIcon": "https://www.stopstalk.com/stopstalk/static/images/codeforces_small.png?_rev=20201225170526", "total_submissions":213 , "solved":132},
+        {"problemName": "Combinations", "problemLink": "https://www.stopstalk.com/problems?problem_id=28645", "siteIcon": "https://www.stopstalk.com/stopstalk/static/images/uva_small.png?_rev=20201225170526", "total_submissions":454,"solved":372},
+        {"problemName": "Pi", "problemLink": "https://www.stopstalk.com/problems?problem_id=28617", "siteIcon": "https://www.stopstalk.com/stopstalk/static/images/uva_small.png?_rev=20201225170526", "total_submissions":234,"solved":211},
+        {"problemName": "Bear and Finding Criminals", "problemLink": "https://www.stopstalk.com/problems?problem_id=15826", "siteIcon": "https://www.stopstalk.com/stopstalk/static/images/codeforces_small.png?_rev=20201225170526", "total_submissions":212,"solved":112},
+    ]
+    );
+} );
+
 app.get( '/dummy', ( req, res ) =>
 {
     res.json( [
