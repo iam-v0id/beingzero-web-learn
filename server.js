@@ -15,7 +15,7 @@ var cors = require( 'cors' );
 
 const app = express();
 
-db.connect();
+//db.connect();
 
 app.listen( config.webPort, function ()
 {
@@ -27,16 +27,16 @@ app.use( express.static( __dirname + '/frontend' ) );
 app.use( express.json() );
 app.use( express.urlencoded( {extended: true} ) );
 app.use( cookieParser() );
-app.use( session( {
-    resave: false,
-    saveUninitialized: false,
-    secret: process.env.SESSION_SECRET,
-    store: MongoStore.create( {mongoUrl: process.env.MONGO_CONNECTION_STRING} )
-} ) );
+// app.use( session( {
+//     resave: false,
+//     saveUninitialized: false,
+//     secret: process.env.SESSION_SECRET,
+//     store: MongoStore.create( {mongoUrl: process.env.MONGO_CONNECTION_STRING} )
+// } ) );
 
 app.get( "/", function ( req, res )
 {
-    res.sendFile( __dirname + "/frontend/html/index.html" );
+    res.sendFile( __dirname + "/frontend/html/tambola.html" );
 } );
 
 app.get( "/resume", function ( req, res )
